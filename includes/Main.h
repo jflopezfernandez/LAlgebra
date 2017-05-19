@@ -21,6 +21,7 @@ const int DECIMAL 	= 1;
 
 
 /** Application Headers */
+#include "Utils.h"
 #include "Number.h"
 
 

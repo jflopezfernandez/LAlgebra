@@ -9,46 +9,27 @@ namespace Math {
 			int d;
 			
 		public:
+			/** Constructors */
 			Rational()
-				: n(0), d(1)
-			{ 
+				: n(0), d(1) { }
 			
-			}
 			Rational(int a) 
-				: n(a), d(1)
-			{
-				
-			}
+				: n(a), d(1) { }
+			
 			Rational(int a, int b)
-				: n(a), d(b)
-			{
-				
-			}
+				: n(a), d(b) { }
 			
-			void simplify() {
-				int gcd = getGCD(this->n, this->d);
-				
-				if (gcd > 1) {
-					this->n /= gcd;
-					this->d /= gcd;
-				}
-			}
+			/** Class methods */
+			void setNumerator(int n);
+			void setDenominator(int d);
 			
-			void print() {
-				this->simplify();
-				
-				if (this->d == 1) {
-					std::cout << this->n << " ";
-				} else if (this->n == 0) {
-					this->d = 1;
-					
-					std::cout << this->n << " ";
-				} else {
-					std::cout << this->n << "/" << this->d << " ";
-				}
-			}
+			int getNumerator(int n);
+			int getDenominator(int d);
+			
+			void simplify();
+			void print();
 	};
-
+	
 	union _type {
 		Rational rat;
 		double dec;
@@ -60,30 +41,14 @@ namespace Math {
 			int valType;
 			
 		public:
+			/** Constructors */
 			Number() = delete;
-			Number(int valType, int a, int b, double c) {
-				this->valType = valType;
-				
-				if (this->valType == RATIONAL) {
-					this->type.rat.n = a;
-					this->type.rat.d = b;
-				} else if (this->valType == DECIMAL) {
-					this->type.dec = c;
-				} else {
-					printf("[Error: %s] Unknown type\n", __func__);
-				}
-			}
+			Number(int valType, int a, int b, double c);
 			
-			print() {
-				if (this->valType == RATIONAL) {
-					this->type.rat.print();
-				} else if (this->valType == DECIMAL) {
-					printf("%f ", this->type.dec);
-				} else {
-					printf("[Error: %s] Unknown type\n", __func__);
-				}
-			}
+			/** Class methods */
+			void print();
 	}; 
+	
 }; // Namespace Math
 
 
