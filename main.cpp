@@ -4,7 +4,8 @@
 
 #include <iostream>
 
-typedef std::int32_t INT;
+const int RATIONAL = 0;
+const int DECIMAL = 1;
 
 
 int getGCD(int m, int n) {
@@ -22,8 +23,8 @@ int getGCD(int m, int n) {
 
 class Rational {
 	private:
-		INT n;
-		INT d;
+		int n;
+		int d;
 		
 	public:
 		Rational()
@@ -71,16 +72,34 @@ union _type {
 	double dec;
 };
 
-enum class valType { RATIONAL, DECIMAL };
-
 class Number {
 	private:
 		union _type type;
-		enum class valType;
+		int valType;
 		
 	public:
-		Number() {
+		Number() = delete;
+		Number(int valType, int a, int b, double c) {
+			this->valType = valType;
 			
+			if (this->valType == RATIONAL) {
+				this->type.rat.n = a;
+				this->type.rat.d = b;
+			} else if (this->valType == DECIMAL) {
+				this->type.dec = c;
+			} else {
+				printf("[Error: %s] Unknown type\n", __func__);
+			}
+		}
+		
+		print() {
+			if (this->valType == RATIONAL) {
+				this->type.rat.print();
+			} else if (this->valType == DECIMAL) {
+				printf("%f ", this->type.dec);
+			} else {
+				printf("[Error: %s] Unknown type\n", __func__);
+			}
 		}
 };
 
@@ -89,13 +108,15 @@ class Number {
 
 int main()
 {
-	Rational r1;
-	Rational r2(2);
-	Rational r3(2,4);
+	Number n1(RATIONAL,-2,4,1);
+	n1.print();
 	
-	r1.print(); printf("\n");
-	r2.print(); printf("\n");
-	r3.print(); printf("\n");
+	printf("\n\n");
+	
+	Number n2(DECIMAL,1,1,0.325);
+	n2.print();
+	
+	printf("\n\n");
 	
 	return EXIT_SUCCESS;
 }

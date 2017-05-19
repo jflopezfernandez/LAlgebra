@@ -1,0 +1,23 @@
+main.cpp: In constructor 'Number::Number(int, int, int, double)':
+main.cpp:82:47: error: use of deleted function '_type::_type()'
+   Number(int valType, int a, int b, double c) {
+                                               ^
+main.cpp:70:7: note: '_type::_type()' is implicitly deleted because the default definition would be ill-formed:
+ union _type {
+       ^~~~~
+main.cpp:71:11: error: union member '_type::rat' with non-trivial 'Rational::Rational()'
+  Rational rat;
+           ^~~
+main.cpp:86:20: error: 'int Rational::n' is private within this context
+     this->type.rat.n = a;
+                    ^
+main.cpp:26:7: note: declared private here
+   int n;
+       ^
+main.cpp:87:20: error: 'int Rational::d' is private within this context
+     this->type.rat.d = b;
+                    ^
+main.cpp:27:7: note: declared private here
+   int d;
+       ^
+make: *** [main.o] Error 1
